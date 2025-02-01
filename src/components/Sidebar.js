@@ -16,88 +16,82 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className={`h-screen fixed md:relative bg-white shadow-md transition-all duration-300 flex flex-col z-50 ${
-        isOpen ? "w-64" : "w-20"
-      } md:w-64 overflow-y-auto`}
-    >
-      {/* Top Section */}
-      <div className="flex items-center justify-center relative p-4">
-        <img
-          src={logo}
-          alt="Logo"
-          className={`h-8 transition-all ${!isOpen && "hidden md:block"}`}
-        />
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 bg-gray-200 rounded-md md:hidden"
-        >
-          {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-        </button>
-      </div>
+    <>
+      {/* Mobile Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-4 left-4 z-50 md:hidden bg-gray-200 p-2 rounded-md"
+      >
+        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+      </button>
 
-      {/* Navigation */}
-      <div className=" mx-3 p-3  items-center">
-        <nav className="mt-4 flex flex-col space-y-2">
-          <SidebarLink
-            to="/"
-            icon={dashboardIcon}
-            text="Dashboard"
-            isOpen={isOpen}
-            active
+      {/* Sidebar */}
+      <div
+        className={`h-screen fixed md:relative bg-white shadow-md transition-all duration-300 flex flex-col z-40 
+          ${isOpen ? "w-64" : "w-0 md:w-64"} 
+          overflow-y-auto`}
+      >
+        {/* Top Section */}
+        <div className="flex items-center justify-center relative p-4">
+          <img
+            src={logo}
+            alt="Logo"
+            className={`h-8 transition-all ${!isOpen && "hidden md:block"}`}
           />
-          <SidebarLink
-            to="#"
-            icon={companyIcon}
-            text="Company"
-            isOpen={isOpen}
-            locked
-          />
-          <SidebarLink
-            to="#"
-            icon={documentsIcon}
-            text="Documents"
-            isOpen={isOpen}
-            locked
-          />
-          <SidebarLink
-            to="#"
-            icon={servicesIcon}
-            text="Services"
-            isOpen={isOpen}
-            locked
-          />
-          <SidebarLink
-            to="#"
-            icon={complianceIcon}
-            text="Compliance"
-            isOpen={isOpen}
-            locked
-          />
-          <SidebarLink
-            to="#"
-            icon={booksIcon}
-            text="Banks"
-            isOpen={isOpen}
-            locked
-          />
-          <SidebarLink
-            to="#"
-            icon={moneyIcon}
-            text="Money"
-            isOpen={isOpen}
-            locked
-          />
-        </nav>
-      </div>
+          {/* <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 bg-gray-200 rounded-md md:hidden"
+          >
+            <FiX size={24} />
+          </button> */}
+        </div>
 
-      <div className="mt-auto p-4 flex items-center justify-center space-x-2">
-        <img src={buildingIcon} alt="Company Icon" className="h-6 w-6" />
-        <p className="text-base font-semibold whitespace-nowrap">
-          Your Company
-        </p>
+        {/* Navigation */}
+        <div className="mx-3 p-3">
+          <nav className="mt-4 flex flex-col space-y-2">
+            <SidebarLink
+              icon={dashboardIcon}
+              text="Dashboard"
+              isOpen={isOpen}
+              active
+            />
+            <SidebarLink
+              icon={companyIcon}
+              text="Company"
+              isOpen={isOpen}
+              locked
+            />
+            <SidebarLink
+              icon={documentsIcon}
+              text="Documents"
+              isOpen={isOpen}
+              locked
+            />
+            <SidebarLink
+              icon={servicesIcon}
+              text="Services"
+              isOpen={isOpen}
+              locked
+            />
+            <SidebarLink
+              icon={complianceIcon}
+              text="Compliance"
+              isOpen={isOpen}
+              locked
+            />
+            <SidebarLink icon={booksIcon} text="Banks" isOpen={isOpen} locked />
+            <SidebarLink icon={moneyIcon} text="Money" isOpen={isOpen} locked />
+          </nav>
+        </div>
+
+        <div className="mt-auto p-4 flex items-center justify-center space-x-2">
+          <img src={buildingIcon} alt="Company Icon" className="h-6 w-6" />
+          <p className="text-base font-semibold whitespace-nowrap">
+            Your Company
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -121,7 +115,6 @@ const SidebarLink = ({ icon, text, isOpen, active, locked }) => {
       >
         {text}
       </span>
-
       {locked && (
         <img
           src={isHovered ? BlackLock : lockIcon}
@@ -132,4 +125,5 @@ const SidebarLink = ({ icon, text, isOpen, active, locked }) => {
     </div>
   );
 };
+
 export default Sidebar;
